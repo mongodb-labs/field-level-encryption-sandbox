@@ -1,4 +1,4 @@
-## Client-Side Field Level Encryption Quickstart Part 1
+## Creating master keys (local or KMS) for client-side field level encryption
 
 Note: See [KMS Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best-practices.pdf) guide for more specific guidance:
 > _You should work to ensure that the corresponding key policies follow a model of least privilege. This includes ensuring that you do NOT include `kms:* ` permissions in an IAM policy._
