@@ -44,11 +44,11 @@ dotnet add package MongoDB.Driver.Core --version 2.10.0-beta1
 dotnet add package MongoDB.Bson --version 2.10.0-beta1
 dotnet add package MongoDB.Libmongocrypt --version 1.0.0-beta01
 
-nano Program.cs
+vi Program.cs
 ```
 
-Replace the default hello world stub with this slightly modified version of second
-code [example](http://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/) in the C# CSFLE tutorial:
+Replace the default hello world `Program.cs` with the following code (slightly modified version of the example
+code [example](http://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/) in the C# CSFLE tutorial):
 
 ```csharp 
 using MongoDB.Driver.Core.Misc;
@@ -134,7 +134,7 @@ namespace MongoDB.Driver.Examples
 }
 ```
  
-Get current libmongocrypt.so binary (_not_ mongocryptd) for your platform and copy into the Nuget libraries:
+Get current `libmongocrypt.so` binary (_not_ `mongocryptd`) for your platform and copy into the Nuget libraries:
 
 ```bash
 mkdir libmongocrypt
@@ -146,7 +146,7 @@ cd ..
 ```
 
 
-## Stub out dependencies & execute
+## Confirm dependencies & execute
 
 
 ```bash
