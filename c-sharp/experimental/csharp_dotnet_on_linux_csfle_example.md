@@ -4,7 +4,7 @@ Note: This is _entirely_ unsupported example for development evaluation only.
 
 ## Prerequisite
 
-Start mongocryptd (from enterprise server package download) as a background service (run `killall mongocryptd` top stop):
+Start mongocryptd (from enterprise server package download) as a background service (run `killall mongocryptd` to stop):
 
 `cd /tmp && mongocryptd 2>&1 > /dev/null &`
 
