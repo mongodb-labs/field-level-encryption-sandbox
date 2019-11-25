@@ -47,8 +47,7 @@ dotnet add package MongoDB.Libmongocrypt --version 1.0.0-beta01
 vi Program.cs
 ```
 
-Replace the default hello world `Program.cs` with the following code (slightly modified version of the example
-code [example](http://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/) in the C# CSFLE tutorial):
+Replace the default hello world `Program.cs` with the following code (slightly modified from the [example code](http://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/) in the C# CSFLE tutorial):
 
 ```csharp 
 using MongoDB.Driver.Core.Misc;
