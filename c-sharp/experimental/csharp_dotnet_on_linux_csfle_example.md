@@ -63,7 +63,7 @@ namespace MongoDB.Driver.Examples
     {
         // Generate the local master key key via: echo $(head -c 96 /dev/urandom | base64 | tr -d '\n')
         
-        private const string LocalMasterKey = "Mng0NCt4ZHVUYUJCa1kxNkVyNUR1QURhZ2h2UzR2d2RrZzh0cFBwM3R6NmdWMDFBMUN3YkQ5aXRRMkhGRGdQV09wOGVNYUMxT2k3NjZKelhaQmRCZGJkTXVyZG9uSjFk";
+        private const string LocalMasterKey = "KThF4V/YH+pGMHF4p7VNMgfEcI1D30mXahpFPbaIVb4T+s6+/SJn3Cz/huyIiAHBqQ4bNz0eapehsWXdfn24e5I3bOKtrMhVJmbuxX2EehBxES1W3+HHHtJn6esBhWyf";
 
         // public void ClientSideEncryptionAutoEncryptionSettingsTour()
         public static void Main(string[] args)
@@ -76,16 +76,23 @@ namespace MongoDB.Driver.Examples
                 { "key", localMasterKey }
             };
             kmsProviders.Add("local", localKey);
+ 
+            var keyVaultDB = "keyVault";
+            var keystore = "__keystore";
+            var keyVaultNamespace = CollectionNamespace.FromFullName( $"{keyVaultDB}.{keystore}" );
 
-            var keyVaultNamespace = CollectionNamespace.FromFullName("admin.datakeys");
             var keyVaultMongoClient = new MongoClient();
             var clientEncryptionSettings = new ClientEncryptionOptions(
                 keyVaultMongoClient,
                 keyVaultNamespace,
                 kmsProviders);
-
             var clientEncryption = new ClientEncryption(clientEncryptionSettings);
-            var dataKeyId = clientEncryption.CreateDataKey("local", new DataKeyOptions(), CancellationToken.None);
+
+            keyVaultMongoClient.GetDatabase( keyVaultDB ).DropCollection( keystore );
+            
+            var altKeyName = new[]{ "csharpDataKey01" };
+            var dataKeyOptions = new DataKeyOptions(alternateKeyNames: altKeyName);         
+            var dataKeyId = clientEncryption.CreateDataKey("local", dataKeyOptions, CancellationToken.None);
             var base64DataKeyId = Convert.ToBase64String(GuidConverter.ToBytes(dataKeyId, GuidRepresentation.Standard));
             clientEncryption.Dispose();
 
@@ -121,7 +128,9 @@ namespace MongoDB.Driver.Examples
             };
             var client = new MongoClient(clientSettings);
             var database = client.GetDatabase("test");
+
             database.DropCollection("coll");
+
             var collection = database.GetCollection<BsonDocument>("coll");
 
             collection.InsertOne(new BsonDocument("encryptedField", "123456789"));
