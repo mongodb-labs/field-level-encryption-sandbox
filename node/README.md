@@ -8,12 +8,20 @@ cd /tmp ; mongocryptd 2>&1 > mongocryptd.log &
 Then create a simple "hello world" project, copying the 2 Node.js files in this repo:
 
 ```bash
-mkdir hello; cp dataKeys.js hello ; cp helloWorld.js hello; cd hello
+mkdir hello; cp createKeys.js hello ; cp helloWorld.js hello; cd hello
 npm install mongodb mongodb-client-encryption --save
 ```
 
-Next, create local test master & data keys: `node dataKeys.js`
+Next, create local test master & data keys:
 
-Finally, run the helloWorld: `node helloWorld.js`
+```bash
+node createKeys.js
+```
+
+Finally, run the helloWorld:
+
+```bash
+node helloWorld.js
+```
 
 Inspect the results in a new mongo shell with an ordinary connection to see the encrypted record.
