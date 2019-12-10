@@ -5,9 +5,9 @@
 
 Note: Code samples in this repository are _entirely_ for development & evaluation only. Note that all examples that use local key files are intended only for illustration - for production purposes, the integrated Key Management Service (KMS) option is strongly recommended. 
 
-For complete information, please see the MongoDB [Client-Side Encryption Documentation](https://docs.mongodb.com/master/core/security-client-side-encryption/) and the multi-language [CSFLE MedCo tutorial](https://docs.mongodb.com/ecosystem/use-cases/client-side-field-level-encryption-guide/) for the latest information and schema & security architecture guidance.
+For complete information, please see the MongoDB [Client-Side Encryption Documentation](https://docs.mongodb.com/master/core/security-client-side-encryption/) and the multi-language [CSFLE MedCo tutorial](https://docs.mongodb.com/ecosystem/use-cases/client-side-field-level-encryption-guide/) for the latest updates and schema & security architecture guidance.
 
-The snippets in this repository are mean to be simple copy/paste examples to get you up and running quickly to let you explore the main features of MongoDB's client-side encryption.
+The snippets in this repository are meant to be simple copy/paste examples to get you up and running quickly to let you explore the main features of MongoDB's client-side encryption.
 
 
 ### Additional Driver Language-specific Docs and Code Examples
