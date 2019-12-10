@@ -41,9 +41,9 @@ func main() {
 
         // insert a document with an encrypted field and a plaintext field
         _, err = coll.InsertOne(ctx, bson.M{
-                "plaintext":       "hello world",
-                "encrypted_field": "encrypted",
-                "altname":         "altname",
+                "plaintext":  "hello world",
+                "ssn":        "123-45-6789",
+                "altname":    "altname",
         })
         if err != nil {
                 log.Fatalf("InsertOne error: %v", err)
