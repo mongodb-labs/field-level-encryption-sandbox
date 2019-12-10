@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.mongodblabs.csfle.ClientSideEncryptionAutoEncryptionSettingsTour</groupId>
+  <artifactId>csfle_hello_world_java</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>csfle_hello_world_java</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+    <properties>
+        <maven-compiler-plugin.source>8</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>8</maven-compiler-plugin.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mongo-java-driver.version>3.11.3-SNAPSHOT</mongo-java-driver.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo-java-driver.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-crypt</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+              <plugin>
+             <!-- Note: Added disable: Cleanup for Daemon Threats -->
+              <groupId>org.codehaus.mojo</groupId>
+             <artifactId>exec-maven-plugin</artifactId>
+              <version>1.6.0</version>
+             <configuration>
+                 <cleanupDaemonThreads>false</cleanupDaemonThreads>
+             </configuration>
+           </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven-compiler-plugin.source}</source>
+                    <target>${maven-compiler-plugin.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>sonatype-snapshot</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype-staging</id>
+            <url>https://oss.sonatype.org/content/repositories/staging/</url>
+        </repository>
+    </repositories>
+</project>
