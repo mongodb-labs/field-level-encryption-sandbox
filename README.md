@@ -10,7 +10,7 @@ For complete information, please see the MongoDB [Client-Side Encryption Documen
 The snippets in this repository are mean to be simple copy/paste examples to get you up and running quickly to let you explore the main features of MongoDB's client-side encryption.
 
 
-### Additional Driver-specific Code Examples
+### Additional Driver Language-specific Docs and Code Examples
 
 - [Python](https://pymongo.readthedocs.io/en/stable/examples/encryption.html)
 - [Java](https://mongodb.github.io/mongo-java-driver/3.11/driver/tutorials/client-side-encryption/#examples)
