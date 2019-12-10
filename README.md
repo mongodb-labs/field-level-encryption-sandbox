@@ -12,7 +12,7 @@ The snippets in this repository are mean to be simple copy/paste examples to get
 
 ### Additional Driver-specific Code Examples
 
-- [Python](https://github.com/mongodb/mongo-python-driver/blob/master/doc/examples/encryption.rst)
+- [Python](https://pymongo.readthedocs.io/en/stable/examples/encryption.html)
 - [Java](https://mongodb.github.io/mongo-java-driver/3.11/driver/tutorials/client-side-encryption/#examples)
 - [Node.js](https://mongodb.github.io/node-mongodb-native/3.4/reference/client-side-encryption/#examples)
 - [C#](https://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/#examples)
