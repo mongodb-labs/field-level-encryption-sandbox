@@ -12,6 +12,5 @@ powershell -C "write-host -nonewline \"`n mongocryptd is \"; if (!(get-process m
 Note: mongocryptd is *NOT* needed for shell - it's integrated into Enterprise shell
 
 ```
-%ProgramFiles%\mongodb\server\4.2\bin\mongo --shell hello_world_shell.js
-
+"%ProgramFiles%\mongodb\server\4.2\bin\mongo" --shell hello_world_shell.js
 ```
