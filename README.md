@@ -1,6 +1,7 @@
-## This Repository is NOT a supported MongoDB product
+## Sample "hello world" code for the MongoDB client-side field level encryption beta program 
 
-Sample "hello world" code for the MongoDB client-side field level encryption beta program 
+
+**This Repository is NOT a supported MongoDB product**
 
 Note: Code samples in this repository are _entirely_ for development & evaluation only. Note that all examples that use local key files are intended only for illustration - for production purposes, the integrated Key Management Service (KMS) option is strongly recommended. 
 
