@@ -1,4 +1,4 @@
-## Sample "hello world" code for the MongoDB client-side field level encryption beta program 
+## Sample "hello world" code for MongoDB client-side field level encryption 
 
 
 **This Repository is NOT a supported MongoDB product**
