@@ -10,7 +10,7 @@
 //  If it's not, you will encounter this: Error: connect ECONNREFUSED 127.0.0.1:27020
 
 //  mkdir hello; cp createKeys.js hello ; cp helloWorld.js hello; cd hello
-//  npm install mongodb mongodb-client-encryption --save
+//  npm install mongodb mongodb-client-encryption
 
 //  node helloWorld.js
 
