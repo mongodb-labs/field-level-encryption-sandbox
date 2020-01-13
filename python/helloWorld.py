@@ -7,8 +7,8 @@
 #
 #  Assumes a local mongod 4.2 DB is running on 27017, and mongocryptd is running on 27020
 #
-#  python3 -m pip install pymongo
-#  python3 -m pip install pymongocrypt
+#  python3 -m pip3 install pymongo
+#  python3 -m pip3 install pymongocrypt
 #
 #  Ensure this works: python3 -c "import pymongocrypt; print(pymongocrypt.libmongocrypt_version())"
 #  To run: python3 helloWorld.py
