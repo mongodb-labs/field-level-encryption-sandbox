@@ -9,10 +9,7 @@
 //  Make sure the mongocryptd binary is on a default path (from the Enterprise server package on MongoDB Downloads)
 //  If it's not, you will encounter this: Error: connect ECONNREFUSED 127.0.0.1:27020
 
-//  mkdir hello; cp createKeys.js hello ; cp helloWorld.js hello; cd hello
-//  npm install mongodb mongodb-client-encryption
-
-//  node helloWorld.js
+//  Assunming you ran Step 1 (createKeys.js) already, to run: node helloWorld.js
 
 
 'use strict';
