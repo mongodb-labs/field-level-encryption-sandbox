@@ -7,10 +7,11 @@
 #
 #  Assumes a local mongod 4.2 DB is running on 27017, and mongocryptd is running on 27020
 #
-#  python -m pip install pymongo
-#  python -m pip install pymongocrypt
+#  python3 -m pip install pymongo
+#  python3 -m pip install pymongocrypt
 #
-#  Ensure this works: python -c "import pymongocrypt; print(pymongocrypt.libmongocrypt_version())"
+#  Ensure this works: python3 -c "import pymongocrypt; print(pymongocrypt.libmongocrypt_version())"
+#  To run: python3 helloWorld.py
 #
 #  If mongocryptd is not running: "pymongo.errors.EncryptionError: localhost:27020: [Errno 111] Connection refused"
 
