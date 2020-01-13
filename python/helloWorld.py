@@ -3,12 +3,12 @@
 #  Python installer requires PIP v 19+ (pip --version)
 #    sudo apt remove python-pip
 #    sudo apt remove python3-pip
-#    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo python get-pip.py && sudo python3 get-pip.py
+#    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && sudo python3 get-pip.py
 #
 #  Assumes a local mongod 4.2 DB is running on 27017, and mongocryptd is running on 27020
 #
-#  python3 -m pip3 install pymongo
-#  python3 -m pip3 install pymongocrypt
+#  python3 -m pip install pymongo
+#  python3 -m pip install pymongocrypt
 #
 #  Ensure this works: python3 -c "import pymongocrypt; print(pymongocrypt.libmongocrypt_version())"
 #  To run: python3 helloWorld.py
@@ -42,14 +42,16 @@ kms_providers = { 'local': {'key': key_bin } }
 print("Please ensure mongocryptd is running (included in the standard enterprise download package).")
       
 fle_opts = AutoEncryptionOpts( kms_providers , "demoFLE.__keystore", mongocryptd_bypass_spawn = True )
-
 client = MongoClient( "mongodb://localhost:27017/demoFLE", auto_encryption_opts = fle_opts )
-
-db = client.demoFLE
-
 client_encryption = pymongo.encryption.ClientEncryption(kms_providers, "demoFLE.__keystore", client, OPTS )
+
+print("Resetting demo database & keystore...")
+client.drop_database('demoFLE')
+
+print("Creating data key...")
 client_encryption.create_data_key('local', key_alt_names=['pykey1'])
 
+db = client.demoFLE
 key1 = db.get_collection('__keystore').find_one({ "keyAltNames": "pykey1" })['_id']
 
 client.close()
