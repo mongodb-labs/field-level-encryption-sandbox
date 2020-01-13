@@ -1,5 +1,8 @@
 // Simple Client-Side Field Level Encryption example for Node.js - Encrypted insert (Step 2)
 
+// NOTE: This is UNSUPPORTED code.
+// Canonical docs are here (see 2nd example): https://mongodb.github.io/node-mongodb-native/3.4/reference/client-side-encryption/#examples
+
 // Requires createKey.js setup (Step 1)
 
 // To install:
@@ -40,7 +43,7 @@ const AEAD_DETERM = 'AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic';
 const AEAD_RANDOM = 'AEAD_AES_256_CBC_HMAC_SHA_512-Random';
 
 const mongodb = require('mongodb');
-const { ClientEncryption } = require('mongodb-client-encryption')(mongodb);
+const { ClientEncryption } = require('mongodb-client-encryption');
 const { MongoClient } = require('mongodb');
 
 (async () => {
