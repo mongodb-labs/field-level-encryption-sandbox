@@ -1,19 +1,22 @@
 // Simple Client-Side Field Level Encryption example for Node.js - Key setup (Step 1)
 
+// NOTE: This is UNSUPPORTED code.
+// Canonical docs are here (see 2nd example): https://mongodb.github.io/node-mongodb-native/3.4/reference/client-side-encryption/#examples
+
 // To install:
 //  Make sure the mongocryptd binary is on a default path (from the Enterprise server package on MongoDB Downloads)
 //  Or running: cd /tmp ; mongocryptd 2>&1 >mongocryptd.log & 
 //  If it's not, you will encounter this: Error: connect ECONNREFUSED 127.0.0.1:27020
 //
 //  mkdir proj; cp hello_fle_node.js proj; cd proj
-//  npm install mongodb mongodb-client-encryption --save
+//  npm install mongodb mongodb-client-encryption
 //  node createKeys.js
 
 'use strict';
 
 const assert = require('assert');
 const mongodb = require('mongodb');
-const { ClientEncryption } = require('mongodb-client-encryption')(mongodb);
+const { ClientEncryption } = require('mongodb-client-encryption');
 const { MongoClient } = mongodb;
 
 const dbName                 = 'demoFLE';
