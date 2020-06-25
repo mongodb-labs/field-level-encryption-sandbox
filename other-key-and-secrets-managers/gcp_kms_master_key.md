@@ -1,4 +1,4 @@
-The following snippets are simple examples of how to consume a master key that's protected by secure key manager or secrets manager via a REST service call to something like GCP, Azure, or Hashicorp Vault
+The following snippets are simple examples of how to consume a master key that's protected by secure key manager or secrets manager via a REST service call to something like GCP KMS, Azure Vault, or Hashicorp Vault
 
 For more advanced examples of data schemas, see:  
 https://github.com/mongodb-labs/field-level-encryption-sandbox/  
