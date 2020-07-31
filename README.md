@@ -16,4 +16,4 @@ The snippets in this repository are meant to be simple copy/paste examples to ge
 - [Java](https://mongodb.github.io/mongo-java-driver/3.12/driver/tutorials/client-side-encryption)
 - [Node.js](https://mongodb.github.io/node-mongodb-native/3.4/reference/client-side-encryption/#examples)
 - [C#](https://mongodb.github.io/mongo-csharp-driver/2.10/reference/driver/crud/client_side_encryption/#examples)
-- [Go](https://godoc.org/go.mongodb.org/mongo-driver/mongo#hdr-Client_Side_Encryption)
+- [Go](https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo?tab=doc#hdr-Client_Side_Encryption)
