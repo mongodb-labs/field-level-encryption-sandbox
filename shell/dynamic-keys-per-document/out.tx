@@ -1,0 +1,164 @@
+$ mongo --nodb --shell hello.js
+MongoDB shell version v4.4.2
+type "help" for help
+
+
+Beginning FLE demo... 
+Setting up an FLE Mongo client session... 
+Wiping FLE demo sandbox... 
+
+Creating user-specific data keys... 
+
+UUID("cd570387-d0dd-4816-a957-578eee7fab0d")
+UUID("8734d8dd-cd82-4e19-9ba5-b189d9a168f9")
+UUID("ff7ebf5b-6774-4ff7-acc6-c79aa6532349")
+
+Attempting to retrieve field keys... 
+{
+	"_id" : UUID("cd570387-d0dd-4816-a957-578eee7fab0d"),
+	"keyMaterial" : BinData(0,"uEG8D6EGfBCpWrix/wtdaOpoDEqJY0Hm3pwlZmza4Wgv4CMSbCTB6cTkTrdEGjd8Gl/FzVzlzQ2RlW3G/Pn7cLkX06gB1uwlemZ8hIAtfM5jQ7YhWaYvtvw3Hn9EuOAoI2thjuocm5Er5Do2wasc2OK8gFCM9cqrEh5hUQ+nRBWrSZTlfo+BdZ9JhzW8HVQVSiLjkPHhm1iVDdRe6l2gOw=="),
+	"creationDate" : ISODate("2021-02-11T02:59:45.536Z"),
+	"updateDate" : ISODate("2021-02-11T02:59:45.536Z"),
+	"status" : 0,
+	"version" : NumberLong(0),
+	"masterKey" : {
+		"provider" : "local"
+	},
+	"keyAltNames" : [
+		"u0001"
+	]
+}
+{
+	"_id" : UUID("8734d8dd-cd82-4e19-9ba5-b189d9a168f9"),
+	"keyMaterial" : BinData(0,"mB20SIAlOUcqwXVN06o0qV2KzofM2HZk5WftF+KB/YQPiLhuckd6VTo4m6/NE1Z9dLIVBxnftnqA9KD4O/4vfvEJ9ByXPiqo0BHX42BG2ODKtZJ+EKEVR72DG1ZjtHjChVF2febUC+uTwpBO7o14XYRihMgcCCt8Akc+UdBxWHzFO0jHcR9hdE07UTaDDoDBeR5JgMDnuRaXA09yTpT1Sg=="),
+	"creationDate" : ISODate("2021-02-11T02:59:45.543Z"),
+	"updateDate" : ISODate("2021-02-11T02:59:45.543Z"),
+	"status" : 0,
+	"version" : NumberLong(0),
+	"masterKey" : {
+		"provider" : "local"
+	},
+	"keyAltNames" : [
+		"u0002"
+	]
+}
+{
+	"_id" : UUID("ff7ebf5b-6774-4ff7-acc6-c79aa6532349"),
+	"keyMaterial" : BinData(0,"d8tJ7FFihiPqoGRg8hPYeifWpB3iI8rLBZ4uUyjDM1J0dk4CrVwa8PcqvzrDYUkZHw7+8ggxINJxLFO6KCH52afxOJ0rS3KqQs2HIkGSc6ywDqndJeGd2n/md6RBcG1LCR50imSX+ZWwBhyJeGtRJ91bBGeLxmL9tlPgmdTj59es7M2oOaE7xrbmvFfpdb1mEehhsNOcROvqWl1XvCs8zA=="),
+	"creationDate" : ISODate("2021-02-11T02:59:45.544Z"),
+	"updateDate" : ISODate("2021-02-11T02:59:45.544Z"),
+	"status" : 0,
+	"version" : NumberLong(0),
+	"masterKey" : {
+		"provider" : "local"
+	},
+	"keyAltNames" : [
+		"u0003"
+	]
+}
+
+Setting server-side json schema for automatic encryption on `people` collection... 
+
+Attempting to insert sample documents with automatic encryption using per-user keys... 
+Result: WriteResult({ "nInserted" : 1 })
+Result: WriteResult({ "nInserted" : 1 })
+
+Dumping decrypted documents from `people`...
+{
+	"_id" : ObjectId("60249da12559abae59dfca34"),
+	"firstName" : "Grace",
+	"lastName" : "Hopper",
+	"userid" : "u0001",
+	"ssn" : "901-01-0001",
+	"dob" : ISODate("1989-12-13T00:00:00Z"),
+	"address" : {
+		"street" : "123 Main Street",
+		"city" : "Omaha",
+		"state" : "Nebraska",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1234",
+		"email" : "grace@example.com"
+	}
+}
+{
+	"_id" : ObjectId("60249da12559abae59dfca35"),
+	"firstName" : "Alan",
+	"lastName" : "Turing",
+	"userid" : "u0002",
+	"ssn" : "901-01-0002",
+	"dob" : ISODate("1912-06-23T00:00:00Z"),
+	"address" : {
+		"street" : "456 Oak Lane",
+		"city" : "Cleveland",
+		"state" : "Ohio",
+		"zip" : "23210"
+	},
+	"contact" : {
+		"mobile" : "202-123-1234",
+		"email" : "alan@example.net"
+	}
+}
+
+Deleting user data key for userid: `u0002`... 
+
+{ "acknowledged" : true, "deletedCount" : 1 }
+
+Establishing a new Mongo client session (to flush cached keys)... 
+
+Dumping updated key vault...
+{
+	"_id" : UUID("cd570387-d0dd-4816-a957-578eee7fab0d"),
+	"keyMaterial" : BinData(0,"uEG8D6EGfBCpWrix/wtdaOpoDEqJY0Hm3pwlZmza4Wgv4CMSbCTB6cTkTrdEGjd8Gl/FzVzlzQ2RlW3G/Pn7cLkX06gB1uwlemZ8hIAtfM5jQ7YhWaYvtvw3Hn9EuOAoI2thjuocm5Er5Do2wasc2OK8gFCM9cqrEh5hUQ+nRBWrSZTlfo+BdZ9JhzW8HVQVSiLjkPHhm1iVDdRe6l2gOw=="),
+	"creationDate" : ISODate("2021-02-11T02:59:45.536Z"),
+	"updateDate" : ISODate("2021-02-11T02:59:45.536Z"),
+	"status" : 0,
+	"version" : NumberLong(0),
+	"masterKey" : {
+		"provider" : "local"
+	},
+	"keyAltNames" : [
+		"u0001"
+	]
+}
+{
+	"_id" : UUID("ff7ebf5b-6774-4ff7-acc6-c79aa6532349"),
+	"keyMaterial" : BinData(0,"d8tJ7FFihiPqoGRg8hPYeifWpB3iI8rLBZ4uUyjDM1J0dk4CrVwa8PcqvzrDYUkZHw7+8ggxINJxLFO6KCH52afxOJ0rS3KqQs2HIkGSc6ywDqndJeGd2n/md6RBcG1LCR50imSX+ZWwBhyJeGtRJ91bBGeLxmL9tlPgmdTj59es7M2oOaE7xrbmvFfpdb1mEehhsNOcROvqWl1XvCs8zA=="),
+	"creationDate" : ISODate("2021-02-11T02:59:45.544Z"),
+	"updateDate" : ISODate("2021-02-11T02:59:45.544Z"),
+	"status" : 0,
+	"version" : NumberLong(0),
+	"masterKey" : {
+		"provider" : "local"
+	},
+	"keyAltNames" : [
+		"u0003"
+	]
+}
+
+Attempting to fetch & decrypt document with userid key u0001...
+{
+	"_id" : ObjectId("60249da12559abae59dfca34"),
+	"firstName" : "Grace",
+	"lastName" : "Hopper",
+	"userid" : "u0001",
+	"ssn" : "901-01-0001",
+	"dob" : ISODate("1989-12-13T00:00:00Z"),
+	"address" : {
+		"street" : "123 Main Street",
+		"city" : "Omaha",
+		"state" : "Nebraska",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1234",
+		"email" : "grace@example.com"
+	}
+}
+
+Attempting to fetch & decrypt document with deleted userid key u0002 (should fail)...
+Error: Invalid keyID.
+
+Demo complete.
+
