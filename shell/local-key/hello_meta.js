@@ -7,6 +7,7 @@
  key (note: this can be combined with the json pointer keyId operator as well)
  without having to repeat the directive. We also illustrate "patternProperties" to 
  force all subdocument fields (via a wildcard) in "contacts" to all use field level encryption.
+ Useful when the field names are unknown, or dynamic (e.g., certain ones sometimes present, sometimes not)
 
  To use this, run Mongo shell, with this file, e.g.:
 
@@ -115,7 +116,7 @@ if ( edition !== undefined && edition.length != 0 ){
 }
 print("MongoDB server running in enterprise mode: " + enterprise + "\n")
 
-print("Attempting to insert sample document with automatic encryption...")
+print("Attempting to insert sample documents with automatic encryption...")
 try {
  var res = null
  res = db.people.insert({
@@ -134,7 +135,7 @@ try {
       email:  'grace@example.com',
       twitter: '@digitalOG',
    }
-  })
+ })
 } catch (err) {
    res = err
 }
@@ -158,11 +159,37 @@ try{
       email:  'alan@example.net',
       twitter: '@codebrkr1',
    }
-  })
+ })
 } catch (err) {
    res = err
 }
 print("Result: " + res)
+
+try{
+  var res = null
+  res = db.people.insert({
+   firstName: 'Ada',
+   lastName:  'Lovelace',
+   ssn: "901-01-0003",
+   dob: new Date('1815-12-05'),
+   address: {
+      street: '3 Ogle St',
+      city:   'Hucknall',
+      state:  'Nottingham',
+      zip:    'NG15 7FQ'
+   },
+   contacts: {
+      mobile: '+44 115 964 1499',
+      email:  'ada@example.net',
+      twitter: '@NoteG',
+      agent: 'Chuck Babbage'
+   }
+ })
+} catch (err) {
+   res = err
+}
+print("Result: " + res)
+
 
 print("Dumping (automatic decrypted) records from `people`:")
 var records = db.people.find().pretty()
