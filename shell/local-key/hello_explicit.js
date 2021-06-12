@@ -1,6 +1,6 @@
 /*
  Simple demonstration using MongoDB Client-Side Field Level Encryption (local key version)
- with EXPLICIT ENCRYPTION
+ with Explicit Encryption including encrypted arrays
  
  Community edition shell v 4.2.2 shell higher and a MongoDB 4.2+ database are required
  
