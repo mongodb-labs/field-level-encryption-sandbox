@@ -1,0 +1,150 @@
+$ mongo --nodb ./hello_explicit.js
+MongoDB shell version v4.4.2
+
+Loading local key configuration file...
+Attempting to create field keys...
+Attempting to retrieve field keys...
+Attempting to insert sample document 1 with explicit encryption...
+Result: WriteResult({ "nInserted" : 1 })
+Attempting to insert sample document 2 with explicit encryption...
+Result: WriteResult({ "nInserted" : 1 })
+Dumping (automatic decrypted) records from `people`:
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5b"),
+	"firstName" : "Grace",
+	"lastName" : "Hopper",
+	"ssn" : "901-01-0001",
+	"dob" : ISODate("1970-01-01T00:00:00Z"),
+	"address" : {
+		"street" : "123 Main Street",
+		"city" : "Omaha",
+		"state" : "Nebraska",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1212",
+		"email" : "grace@example.com"
+	},
+	"tags" : [
+		"American",
+		"pioneer",
+		"Univac"
+	]
+}
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5c"),
+	"firstName" : "Alan",
+	"lastName" : "Turing",
+	"ssn" : "901-01-0002",
+	"dob" : ISODate("1912-06-23T00:00:00Z"),
+	"address" : {
+		"street" : "123 Oak Lane",
+		"city" : "Cleveland",
+		"state" : "Ohio",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1234",
+		"email" : "alan@example.net"
+	},
+	"tags" : [
+		"British",
+		"pioneer",
+		"encryption",
+		"Engigma"
+	]
+}
+Attempting to search for array element `tag` containing `pioneer`
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5b"),
+	"firstName" : "Grace",
+	"lastName" : "Hopper",
+	"ssn" : "901-01-0001",
+	"dob" : ISODate("1970-01-01T00:00:00Z"),
+	"address" : {
+		"street" : "123 Main Street",
+		"city" : "Omaha",
+		"state" : "Nebraska",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1212",
+		"email" : "grace@example.com"
+	},
+	"tags" : [
+		"American",
+		"pioneer",
+		"Univac"
+	]
+}
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5c"),
+	"firstName" : "Alan",
+	"lastName" : "Turing",
+	"ssn" : "901-01-0002",
+	"dob" : ISODate("1912-06-23T00:00:00Z"),
+	"address" : {
+		"street" : "123 Oak Lane",
+		"city" : "Cleveland",
+		"state" : "Ohio",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : "202-555-1234",
+		"email" : "alan@example.net"
+	},
+	"tags" : [
+		"British",
+		"pioneer",
+		"encryption",
+		"Engigma"
+	]
+}
+Dumping (raw) records from `people`:
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5b"),
+	"firstName" : "Grace",
+	"lastName" : "Hopper",
+	"ssn" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/IC/orkqZUhz848jO4blm5SnSTNCG2btoGnnOeoAobVliRLddDRm6IGTs7SSBlyzHZOwq21cBkN3lZ74Sooq97v0HMm963n/KCUqjNrB5H0/qM="),
+	"dob" : BinData(6,"Ak9Xl6zcZ0itljMCgr/aS/IJb/i0NAeXE4pObGZEgoEEWJUR1ijRu4tLhKFI62GxqbmnEDNZJML5zV/YEJlFeIv0MCoLvj99bI+u8JQOu0Bdcg=="),
+	"address" : {
+		"street" : "123 Main Street",
+		"city" : "Omaha",
+		"state" : "Nebraska",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICXHapgBmVoELW+dMURw201zICO4oiU+VJT8I5FEKS6+IYMmv79QzZsPusGj1i1dKapI3H2GOlJur7Hkb+aRzdxrRHAHW9yV08+7+8RxLRzhE="),
+		"email" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICZgPNlXlcbshJZQVAt9FKdKu/VYuNX6swc3niMmv8tTBjZgUh6C+4cgN5A1ZQEepAl5Pvr3WzQFQJ8+eaZCOHBYR7/LZoTOMrvj6i4J68Fh8=")
+	},
+	"tags" : [
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICM0cFmtSiEjBuZCXTOr7fA4gypBzxEGywpTx/oJ3xx2etf3IG3TW284AMsReftbTxop0xUi3w5yVrSJZ7dIMyzg=="),
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICqGMbADPKf4frmVojEtaO5yeLM1+retGrUHQnsMwjKVYdudxOaUcese+gZiqG3nDYVDc1xlB3Byvd5Uc9DWxRTQ=="),
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICAnaveSKmIDjXkZXW1/ZaEYCcq5vmw6svc//rL4ZywN6h7DFxYBG7JNBWGXw8tG8SZ8XAxt0f2wNvBlWIvM1IGw==")
+	]
+}
+{
+	"_id" : ObjectId("60c4343e6ec254821d14eb5c"),
+	"firstName" : "Alan",
+	"lastName" : "Turing",
+	"ssn" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICH2RzyAWmft1WyQC6DDm6S/4Ro9R9G4KOykMVPIic10+EtBAzPyzQqy0RVkTfLXgA9cvvSuzdG+SRNpGo0t6WvQ5M5cKIV3spZMKhhx1oNIo="),
+	"dob" : BinData(6,"Ak9Xl6zcZ0itljMCgr/aS/IJXfhrkJkWNtE6SYvOvHaCqJUkZXnXgmlVvdK0/c3CD/LmNhCC1AU6igHQdWa/q0CkzifX9ChZQpEcVy2pnGPXjA=="),
+	"address" : {
+		"street" : "123 Oak Lane",
+		"city" : "Cleveland",
+		"state" : "Ohio",
+		"zip" : "90210"
+	},
+	"contact" : {
+		"mobile" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICeI0ojCWLtfUDTyljqdTHTK7dZcBfJ3nEa5VRoGPYdER/l0oza00MiGp3P4aJkp5YQmds9mnYPWUOZttX0Gl2J2Nvt01NJIRqQ0BCNin7S4A="),
+		"email" : BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICxzoxhcJ7K9n3WqZiJxXeAKoQu7uOjaB7PM5ljrA+wjiWcxxW13GRfklfMHPd7PZoyA3nf1tqaeXiZu4fB64dG58ryOGpACuisMO08KYecgs=")
+	},
+	"tags" : [
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICAObR40BfP1BL570+HMmFDyCSCTkisTTtcoFHo4t2ZG3p0idZst62Ck9qwhiayIVDpye8u8h9xdI4jkeKYD5Fvg=="),
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICqGMbADPKf4frmVojEtaO5yeLM1+retGrUHQnsMwjKVYdudxOaUcese+gZiqG3nDYVDc1xlB3Byvd5Uc9DWxRTQ=="),
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICiUSkDOnplJB36sbJUnPCHzX33u/wyMSPajj7DzrslonrZsddI+9hsaT3CPOxKlrR6rB6NmRnWYmKOhGix1kXMA=="),
+		BinData(6,"AU9Xl6zcZ0itljMCgr/aS/ICd+dLiKG1TIj+XVBsaiB2Dq47e2iLNyJ2lLAtjjf8ZrarBUNPNgVkveslyuLvcYHgkjTWGp4La9LkJvxtg3oqCA==")
+	]
+}
+
+Demo complete.
