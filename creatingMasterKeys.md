@@ -55,7 +55,7 @@ Note: See [KMS Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best
   - Secret access key / Show
     - _(copy Access key ID and Secret access key, along with master key ARN from above and save)_
 
-### 4. Create a local Master Key file
+### 4. Create a local Master Key file (not needed if using a KMS provider master key)
 
 _*Note: a local key file should only be used in a non-production test environment.*_
 
