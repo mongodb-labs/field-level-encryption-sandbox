@@ -195,7 +195,7 @@ try{
 }
 print("Result: " + res)
 
-print("\nEnabling session bypass on automatic encrypt/decrypt... \n")
+print("\nEnabling session bypass on automatic encrypt (autodecrypt is always on, even in explicit mode)... \n")
 
 var clientSideFLEOptions = {
    "kmsProviders": { "local": localDevMasterKey },
