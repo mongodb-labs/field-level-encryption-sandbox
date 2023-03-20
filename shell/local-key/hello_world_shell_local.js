@@ -1,15 +1,17 @@
 /*
- Simple demonstration using MongoDB Client-Side Field Level Encryption (local key version)
- Requires Community or (preferrably) Enterprise 4.2.2 shell and a MongoDB 4.2+ database
+ Simple demonstration using MongoDB Client-Side Field Level Encryption/CSFLE
+ Config file shows local or KMS key connect to a local DB, self-managed, or Atlas cluster
+ Requires Community or (preferrably) Enterprise 4.2+ database
  Local, stand-alone, or Atlas MongoDB will all work.
- To use this, just open Mongo shell, with this file, e.g.:
+ To use this, open (reasonbly current) mongosh shell, with this file, e.g.:
 
-    mongo --nodb --shell hello_world_shell_local.js
+    mongosh --nodb --shell <thisFile.js>
 
- Note, you will need the attached `localkey_config.env` file from this repo.
+ Note, you will need the `localkey_config.env` file from this repo.
 */
 
 var demoDB = "demoFLE"
+var vaultDB = "vault"
 var keyVaultColl = "__keystore"  // nothing special about this key vault collection name, but make it stand out
 
 const ENC_DETERM = 'AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic'
@@ -25,7 +27,7 @@ try {
 }
 
 if (env.keyString == "PASTE GENERATED KEY STRING HERE"){
-   print("\nPlease generate a new local key (see `localkey_config.js` file). Exiting. \n\n"); quit();
+   print("\nPlease generate a new local key (see `localkey_config.env` file). Exiting. \n\n"); quit();
 } 
 
 var localDevMasterKey = { key: BinData( 0, env.keyString ) }
@@ -33,7 +35,7 @@ var localDevMasterKey = { key: BinData( 0, env.keyString ) }
 var clientSideFLEOptions = {
     kmsProviders : {  local : localDevMasterKey  } ,
     schemaMap: {},  // on first invocation prior to field key generation, this should be empty
-    keyVaultNamespace: demoDB + "." + keyVaultColl
+    keyVaultNamespace: vaultDB + "." + keyVaultColl
 };
 
 encryptedSession = new Mongo(env.connStr, clientSideFLEOptions);
@@ -47,12 +49,14 @@ db.getCollectionNames().forEach(function(c){db.getCollection(c).drop()});
 var keyVault = encryptedSession.getKeyVault();
 
 print("Attempting to create field keys...")
-keyVault.createKey("local", "", ["fieldKey1"])
-keyVault.createKey("local", "", ["fieldKey2"])
-
 print("Attempting to retrieve field keys...")
+var key1 = keyVault.createKey("local", "", ["fieldKey1"])
+var key2 = keyVault.createKey("local", "", ["fieldKey2"])
+
+/*print("Attempting to retrieve field keys...")
 var key1 = db.getCollection( keyVaultColl ).find({ keyAltNames: 'fieldKey1' }).toArray()[0]._id
 var key2 = db.getCollection( keyVaultColl ).find({ keyAltNames: 'fieldKey2' }).toArray()[0]._id
+*/
 
 print("Setting server-side json schema for automatic encryption on `people` collection...")
 db.createCollection("people")
@@ -129,10 +133,11 @@ print("Updating FLE mode session to enable server- and client-side json schema f
 var clientSideFLEOptions = {
    kmsProviders: { local: localDevMasterKey },
    schemaMap: peopleSchema,
-   keyVaultNamespace: demoDB + "." + keyVaultColl
+   keyVaultNamespace: vaultDB + "." + keyVaultColl
 }
 var encryptedSession = new Mongo(env.connStr, clientSideFLEOptions)
 var db = encryptedSession.getDB( demoDB );
+var clientEncryption = encryptedSession.getClientEncryption()
 
 print("Attempting to detect server-side Enterprise edition mode...")
 var edition = db.runCommand({buildInfo:1}).modules
@@ -145,7 +150,7 @@ print("MongoDB server running in enterprise mode: " + enterprise + "\n")
 print("Attempting to insert sample document with automatic encryption...")
 try {
  var res = null
- res = db.people.insert({
+ res = db.people.insertOne({
    firstName: 'Grace',
    lastName:  'Hopper',
    ssn: "901-01-0001",
@@ -166,14 +171,14 @@ try {
 }
 print("Result: " + res)
 
-print("Attempting to insert sample document with explicit encryption...")
+print("Attempting to insert sample document with explicit encryption in automatic mode (will fail)...")
 try{
   var res = null
-  res = db.people.insert({
+  res = db.people.insertOne({
    firstName: 'Alan',
    lastName:  'Turing',
-   ssn: db.getMongo().encrypt( key1 , "901-01-0002" , ENC_DETERM ),
-   dob: db.getMongo().encrypt( key1 , new Date('1912-06-23'), ENC_RANDOM ),
+   ssn: clientEncryption.encrypt( key1 , "901-01-0002" , ENC_DETERM ),
+   dob: clientEncryption.encrypt( key1 , new Date('1912-06-23'), ENC_RANDOM ),
    address: {
       street: '123 Oak Lane',
       city:   'Cleveland',
@@ -181,8 +186,8 @@ try{
       zip:    '90210'
    },
    contact: {
-      mobile: db.getMongo().encrypt( key2 , '202-555-1234', ENC_DETERM ),
-      email:  db.getMongo().encrypt( key2 , 'alan@example.net', ENC_DETERM ),
+      mobile: clientEncryption.encrypt( key2 , '202-555-1234', ENC_DETERM ),
+      email:  clientEncryption.encrypt( key2 , 'alan@example.net', ENC_DETERM ),
    }
  })
 } catch (err) {
@@ -196,20 +201,20 @@ var clientSideFLEOptions = {
    "kmsProviders": { "local": localDevMasterKey },
    bypassAutoEncryption: true,
    schemaMap: peopleSchema,
-   keyVaultNamespace: demoDB + "." + keyVaultColl
+   keyVaultNamespace: vaultDB + "." + keyVaultColl
 }
 var encryptedSession = new Mongo(env.connStr, clientSideFLEOptions)
 var db = encryptedSession.getDB( demoDB );
-
-print("Attempting to insert sample document with explicit encryption...")
+var clientEncryption = encryptedSession.getClientEncryption()
+print("Attempting to insert sample document with explicit encryption in bypass mode (should succeed)...")
 
 try{
   var res = null
-  res = db.people.insert({
+  res = db.people.insertOne({
    firstName: 'Alan',
    lastName:  'Turing',
-   ssn: db.getMongo().encrypt( key1 , "901-01-0002" , ENC_DETERM ),
-   dob: db.getMongo().encrypt( key1 , new Date('1912-06-23'), ENC_RANDOM ),
+   ssn: clientEncryption.encrypt( key1 , "901-01-0002" , ENC_DETERM ),
+   dob: clientEncryption.encrypt( key1 , new Date('1912-06-23'), ENC_RANDOM ),
    address: {
       street: '123 Oak Lane',
       city:   'Cleveland',
@@ -217,8 +222,8 @@ try{
       zip:    '90210'
    },
    contact: {
-      mobile: db.getMongo().encrypt( key2 , '202-555-1234', ENC_DETERM ),
-      email:  db.getMongo().encrypt( key2 , 'alan@example.net', ENC_DETERM ),
+      mobile: clientEncryption.encrypt( key2 , '202-555-1234', ENC_DETERM ),
+      email:  clientEncryption.encrypt( key2 , 'alan@example.net', ENC_DETERM ),
    }
  })
 } catch (err) {
@@ -232,11 +237,11 @@ while (records.hasNext()) {
    printjson(records.next());
 }
 
-print("\nDisabling session bypass for automatic encrypt/decrypt...\n")
+print("\nDisabling session bypass for automatic encrypt...\n")
 var clientSideFLEOptions = {
    kmsProviders: { local: localDevMasterKey },
    schemaMap: peopleSchema,
-   keyVaultNamespace: demoDB + "." + keyVaultColl
+   keyVaultNamespace: vaultDB + "." + keyVaultColl
 }
 var encryptedSession = new Mongo(env.connStr, clientSideFLEOptions)
 var db = encryptedSession.getDB( demoDB );
@@ -246,5 +251,16 @@ var records = db.people.find().pretty()
 while (records.hasNext()) {
    printjson(records.next());
 }
+
+print("\nEstablishing convention/non-encrypted session...\n")
+var plaintextSession = new Mongo(env.connStr) // Note: No clientSideFLEOptions specified
+var db = plaintextSession.getDB( demoDB );
+
+print("Dumping raw records from `people`:")
+var records = db.people.find().pretty()
+while (records.hasNext()) {
+   printjson(records.next());
+}
+
 
 print("\nDemo complete.")
