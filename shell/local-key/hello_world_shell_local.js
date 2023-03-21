@@ -49,16 +49,21 @@ db.getCollectionNames().forEach(function(c){db.getCollection(c).drop()});
 var keyVault = encryptedSession.getKeyVault();
 
 print("Attempting to create field keys...")
-print("Attempting to retrieve field keys...")
 var key1 = keyVault.createKey("local", "", ["fieldKey1"])
 var key2 = keyVault.createKey("local", "", ["fieldKey2"])
 
-/*print("Attempting to retrieve field keys...")
-var key1 = db.getCollection( keyVaultColl ).find({ keyAltNames: 'fieldKey1' }).toArray()[0]._id
-var key2 = db.getCollection( keyVaultColl ).find({ keyAltNames: 'fieldKey2' }).toArray()[0]._id
+/*
+If you need to access keys in a different session, use mongosh-specific helper method: getKeyByAltName
+print("Attempting to retrieve field keys...")
+var key1 = keyVault.getKeyByAltName("fieldKey1")._id
+var key2 = keyVault.getKeyByAltName("fieldKey2")._id
 */
 
-print("Setting server-side json schema for automatic encryption on `people` collection...")
+print("key1: "); printjson(key1.toString())
+print("key2: "); printjson(key2.toString())
+
+
+print("\nSetting server-side json schema for automatic encryption on `people` collection...")
 db.createCollection("people")
 db.runCommand({
    collMod: "people",
